@@ -4,20 +4,20 @@ var Select_List_Data = {
         // names match option values in controlling select box
         tier1: {
             text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '+0', '11', '12', '13', '14', '15']
+            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         },
         tier2: {
             text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '+0', '11', '12', '13', '14', '15']
+            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         },
         tier3L: {
             text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '+0', '11', '12', '13', '14', '15']
+            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         },
         tier3M: {
             // example without values
             text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15', '+16', '+17', '+18', '+19', '+20'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '+0', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
         }
     
     
@@ -42,7 +42,6 @@ function removeAllOptions(sel, removeGrp) {
         par.removeChild( sel.options[i-1] );
     }
 }
-
 
 function appendDataToSelect(sel, obj) {
     var f = document.createDocumentFragment();
@@ -87,7 +86,7 @@ function appendDataToSelect(sel, obj) {
 }
 
 // anonymous function assigned to onchange event of controlling select box
-document.forms['demoForm'].elements['tier'].onchange = function(e) {
+document.forms['gearlevel'].elements['tier'].onchange = function(e) {
     // name of associated select box
     var relName = 'choices';
     
@@ -96,7 +95,8 @@ document.forms['demoForm'].elements['tier'].onchange = function(e) {
     
     // get data from object literal based on selection in controlling select box (this.value)
     var obj = Select_List_Data[ relName ][ this.value ];
-    
+    console.log(obj);
+
     // remove current option elements
     removeAllOptions(relList, true);
     
@@ -107,11 +107,43 @@ document.forms['demoForm'].elements['tier'].onchange = function(e) {
     copyAllSelection();
 };
 
+document.forms['gearlevel'].elements['head_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['head_end']);
+    temp = document.forms['gearlevel'].elements['tier'];
+    let obj = Select_List_Data['choices'][temp.value];
+    console.log(obj);
+    for (let i = 1; i < this.value; i++) {
+        obj.text.shift();
+        obj.value.shift();
+    }
+    console.log(obj);
+    appendDataToSelect(this.form.elements['head_end'], obj);
+};
+
+document.forms['gearlevel'].elements['shoulders_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['shoulders_end']);
+};
+
+document.forms['gearlevel'].elements['chest_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['chest_end']);
+};
+
+document.forms['gearlevel'].elements['hands_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['hands_end']);
+};
+
+document.forms['gearlevel'].elements['legs_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['legs_end']);
+};
+
+document.forms['gearlevel'].elements['weapon_start'].onchange = function(e) {
+    removeAllOptions(this.form.elements['weapon_end']);
+};
 
 // populate associated select box as page loads
 (function() { // immediate function to avoid globals
     
-    var form = document.forms['demoForm'];
+    var form = document.forms['gearlevel'];
     
     // reference to controlling select box
     var sel = form.elements['tier'];
@@ -135,7 +167,6 @@ document.forms['demoForm'].elements['tier'].onchange = function(e) {
 function copyAllSelection() {
     var root = document.getElementById("choices");
     
-    root.hidden = true;
     head_start.innerHTML = root.innerHTML;
     head_end.innerHTML = root.innerHTML;
     shoulders_start.innerHTML = root.innerHTML;

@@ -95,7 +95,6 @@ document.forms['gearlevel'].elements['tier'].onchange = function(e) {
     
     // get data from object literal based on selection in controlling select box (this.value)
     var obj = Select_List_Data[ relName ][ this.value ];
-    console.log(obj);
 
     // remove current option elements
     removeAllOptions(relList, true);
@@ -108,36 +107,213 @@ document.forms['gearlevel'].elements['tier'].onchange = function(e) {
 };
 
 document.forms['gearlevel'].elements['head_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['head_end']);
-    temp = document.forms['gearlevel'].elements['tier'];
-    let obj = Select_List_Data['choices'][temp.value];
-    console.log(obj);
-    for (let i = 1; i < this.value; i++) {
-        obj.text.shift();
-        obj.value.shift();
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'head_start';
+    let end_name = 'head_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
     }
-    console.log(obj);
-    appendDataToSelect(this.form.elements['head_end'], obj);
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 document.forms['gearlevel'].elements['shoulders_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['shoulders_end']);
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'shoulders_start';
+    let end_name = 'shoulders_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
+    }
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 document.forms['gearlevel'].elements['chest_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['chest_end']);
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'chest_start';
+    let end_name = 'chest_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
+    }
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 document.forms['gearlevel'].elements['hands_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['hands_end']);
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'hands_start';
+    let end_name = 'hands_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
+    }
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 document.forms['gearlevel'].elements['legs_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['legs_end']);
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'legs_start';
+    let end_name = 'legs_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
+    }
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 document.forms['gearlevel'].elements['weapon_start'].onchange = function(e) {
-    removeAllOptions(this.form.elements['weapon_end']);
+    // The form being changed so I can copy paste to the other functions
+    let start_name = 'weapon_start';
+    let end_name = 'weapon_end';
+
+    // Temporary variables that is only used to maintain current 'end' value if end value is greater than new start value
+    let start = parseInt(document.getElementById(start_name).value);
+    let end = parseInt(document.getElementById(end_name).value);
+    let temp_end = document.getElementById(end_name).value;
+
+    // Remove all options from end select
+    removeAllOptions(this.form.elements[end_name]);
+
+    // Declaration and initialization of variable to point at list of objects that contain the appropriate arrays
+    let obj = Select_List_Data['choices'][document.forms['gearlevel'].elements['tier'].value];
+    // Declaration of second variable to copy previous variable with the invalid options cut off
+    let obj_copy = {};
+    obj_copy.text = [];
+    obj_copy.value = [];
+
+    // Goes from current point of start of array of start select form to end of end of select form
+    for (let i = this.value; i <= this.length; i++) {
+        obj_copy.text.push(obj.text[i-1]);
+        obj_copy.value.push(obj.value[i-1]);
+    }
+
+    // Add all options to end select
+    appendDataToSelect(this.form.elements[end_name], obj_copy);
+
+    // If the old end value is greater than the new start value, re-set old end value (just preference)
+    if (start < end) {
+        document.getElementById(end_name).value = temp_end;
+    }
 };
 
 // populate associated select box as page loads

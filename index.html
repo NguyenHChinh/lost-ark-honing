@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Ark Honing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="#" method="post" id="demoForm" class="demoForm">
+        <p>
+            <label for="tier">Select a tier:&nbsp&nbsp</label>
+            <select id="tier" name="tier">
+                <option value="tier1">Tier 1</option>
+                <option value="tier2">Tier 2</option>
+                <option value="tier3L">Tier 3 (Low)</option>
+                <option value="tier3M">Tier 3 (Med)</option>
+            </select>
+        </p>
+        <br>
+        <p>
+            <label for="head">Head:</label>
+            <select name="head_start" id="head_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="head_end" id="head_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <label for="shoulders">Shoulders:</label>
+            <select name="shoulders_start" id="shoulders_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="shoulders_end" id="shoulders_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <label for="chest">Chest:</label>
+            <select name="chest_start" id="chest_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="chest_end" id="chest_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <label for="hands">Hands:</label>
+            <select name="hands_start" id="hands_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="hands_end" id="hands_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <label for="legs">Legs:</label>
+            <select name="legs_start" id="legs_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="legs_end" id="legs_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <label for="weapon">Weapon:</label>
+            <select name="weapon_start" id="weapon_start">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+            →
+            <select name="weapon_end" id="weapon_end">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+        <p>
+            <select name="secret" id="choices" hidden="true">
+                <!-- populated using JavaScript in /static/index.js -->
+            </select>
+        </p>
+    </form>
+
+    <script src="honing.js"></script>
+</body>
+</html>

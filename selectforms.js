@@ -3,24 +3,21 @@ var Select_List_Data = {
         
         // names match option values in controlling select box
         tier1: {
-            text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+            text: ['+0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15', '+16', '+17', '+18', '+19', '+20'],
+            value: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
         },
         tier2: {
-            text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+            text: ['+0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15', '+16', '+17', '+18', '+19', '+20'],
+            value: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
         },
         tier3L: {
-            text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+            text: ['+0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15'],
+            value: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         },
         tier3M: {
-            // example without values
-            text: ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15', '+16', '+17', '+18', '+19', '+20'],
-            value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+            text: ['+0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14', '+15', '+16', '+17', '+18', '+19', '+20'],
+            value: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
         }
-    
-    
     }    
 };
 
@@ -127,9 +124,9 @@ document.forms['gearlevel'].elements['head_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -162,9 +159,9 @@ document.forms['gearlevel'].elements['shoulders_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -197,9 +194,9 @@ document.forms['gearlevel'].elements['chest_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -232,9 +229,9 @@ document.forms['gearlevel'].elements['hands_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -267,9 +264,9 @@ document.forms['gearlevel'].elements['legs_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -302,9 +299,9 @@ document.forms['gearlevel'].elements['weapon_start'].onchange = function(e) {
     obj_copy.value = [];
 
     // Goes from current point of start of array of start select form to end of end of select form
-    for (let i = this.value; i <= this.length; i++) {
-        obj_copy.text.push(obj.text[i-1]);
-        obj_copy.value.push(obj.value[i-1]);
+    for (let i = this.value; i <= this.length - 1; i++) {
+        obj_copy.text.push(obj.text[i]);
+        obj_copy.value.push(obj.value[i]);
     }
 
     // Add all options to end select
@@ -342,6 +339,7 @@ document.forms['gearlevel'].elements['weapon_start'].onchange = function(e) {
 
 function copyAllSelection() {
     var root = document.getElementById("choices");
+    choices.value = 5;
     
     head_start.innerHTML = root.innerHTML;
     head_end.innerHTML = root.innerHTML;

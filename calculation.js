@@ -1,3 +1,8 @@
+// Universal Materials
+var gold, silver;
+// Tier-Specfic Materials
+var guardian_stone, destruction_stone, leapstone, shard, fusion_material;
+
 let btnCalculate = document.createElement("button");
 btnCalculate.innerHTML = "Calculate";
 btnCalculate.type = "submit";
@@ -6,12 +11,14 @@ btnCalculate.onclick = function () {
 }
 document.body.appendChild(btnCalculate);
 
+// Creates a random integer from 1 to 100, used for creating my randomc hance
 function randomInt() {
     return Math.random() * (100 - 1) + 1;
 }
 
 function progressHone(start, end) {
     while (start < end) {
+        // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
         if (randomInt() < 50) {
             printTerminal("Failed at gear level: " + start);
         }
@@ -24,8 +31,11 @@ function progressHone(start, end) {
 
 var terminal = document.getElementById("terminal");
 function printTerminal(string) {
-    if (terminal.value.length > 500) {
-        terminal.value = terminal.value.slice(250);
+    if (terminal.value.length > 2000) {
+        terminal.value = terminal.value.slice(100);
+        var lines = terminal.value.split('\n');
+        lines.splice(0,1);
+        terminal.value = lines.join('\n');
     }
 
     terminal.value = terminal.value + string + '\n';
@@ -33,6 +43,17 @@ function printTerminal(string) {
 }
 
 function calculate() {
+    // Resetting variables
+    terminal.value = "";
+    gold = 0;
+    silver = 0;
+    guardian_stone = 0;
+    destruction_stone = 0;
+    leapstone = 0;
+    shard = 0;
+    fusion_material = 0;
+
+    // Binding variables to document select forms
     var tier = document.getElementById("tier").value
     var head_start = document.getElementById("head_start").value;
     var head_end = document.getElementById("head_end").value;
@@ -46,20 +67,12 @@ function calculate() {
     var legs_end = document.getElementById("legs_end").value;
     var weapon_start = document.getElementById("weapon_start").value;
     var weapon_end = document.getElementById("weapon_end").value;
-       
-/*     console.log(tier);
-    console.log(head_start);
-    console.log(head_end);
-    console.log(shoulders_start);
-    console.log(shoulders_end);
-    console.log(chest_start);
-    console.log(chest_end);
-    console.log(hands_start);
-    console.log(hands_end);
-    console.log(legs_start);
-    console.log(legs_end);
-    console.log(weapon_start);
-    console.log(weapon_end); */
 
+    // Run main portion of program
     progressHone(head_start, head_end);
+    progressHone(shoulders_start, shoulders_end);
+    progressHone(chest_start, chest_end);
+    progressHone(hands_start, hands_end);
+    progressHone(legs_start, legs_end);
+    progressHone(weapon_start, weapon_end);
 }

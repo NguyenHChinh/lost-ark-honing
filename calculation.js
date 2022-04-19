@@ -19,16 +19,41 @@ function randomInt() {
 }
 
 function progressHone(start, end) {
+    let chance = 0;
+    let bonus = 0;
+    let artisan = 0;
     while (start < end) {
-        // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
-        if (randomInt() <= chance(document.getElementById("tier").value, parseInt(start))) {
+        // Base chance
+        let base_chance = findChance(document.getElementById("tier").value, parseInt(start));
+        chance = base_chance;
+        // Bonus chance on fails
+        chance += bonus;
+
+        if (artisan >= 100) {
             start++;
+            bonus = 0;
+            artisan = 0;
+            printTerminal(`Yikes.. You hit pity! Gear level is now: ${start}`);
+            continue;
+        }
+        // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
+        if (randomInt() <= chance) {
             successes++;
-            printTerminal("Success! Gear level is now: " + start);
+            // Increasing "item level"
+            start++;
+            // Resetting chance bonus
+            bonus = 0;
+            // Resetting Artisan's energy
+            artisan = 0;
+            printTerminal(`Success! Gear level is now: ${start}!`);
         }
         else {
             fails++;
-            printTerminal("Failed at gear level: " + start);
+            // Increasing bonus, stacking with each fail
+            bonus += base_chance * 0.1;
+            // Increasing Artisan's energy based on current chance
+            artisan = artisan + (chance * 0.465);
+            printTerminal(`Failed at gear level: ${start} with a ${chance}% chance!`);
         }
     }
 }
@@ -86,8 +111,6 @@ function calculate() {
     console.log(`Successes: ${successes}`)
     console.log(`Fails: ${fails}`)
 }
-
-
 
 // TESTING CHANCE MANUALLY
 /*

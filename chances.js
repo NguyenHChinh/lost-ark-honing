@@ -1,4 +1,4 @@
-function chance(tier, level) {
+function findChance(tier, level) {
     switch (tier) {
         // TIER 1 CHANCES
         case 'tier1':

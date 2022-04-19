@@ -13,13 +13,13 @@ document.body.appendChild(btnCalculate);
 
 // Creates a random integer from 1 to 100, used for creating my randomc hance
 function randomInt() {
-    return parseInt(Math.random() * (101 - 1) + 0);
+    return parseInt(Math.random() * (100) + 1);
 }
 
 function progressHone(start, end) {
     while (start < end) {
         // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
-        if (randomInt() < chance(document.getElementById("tier").value, parseInt(start))) {
+        if (randomInt() <= chance(document.getElementById("tier").value, parseInt(start))) {
             start++;
             printTerminal("Success! Gear level is now: " + start);
         }
@@ -78,12 +78,22 @@ function calculate() {
     progressHone(weapon_start, weapon_end);
 }
 
+
+
 // TESTING CHANCE MANUALLY
 /*
+for (let i = 0; i < 100; i++) {
+    let random = randomInt();
+    if (random < 5) {
+        console.log(random);
+    } 
+}
+
+console.log(chance('tier1', 19));
 fails = 0;
 successes = 0;
 for (let i = 0; i < 100000; i++) {
-    if (randomInt() < chance('tier1', 19)) {
+    if (randomInt() <= chance('tier1', 19)) {
         successes++;
     }
     else {
@@ -92,5 +102,5 @@ for (let i = 0; i < 100000; i++) {
 }
 console.log(`Successes: ${successes}`)
 console.log(`Fails: ${fails}`)
-console.log(`Success Rate: ${successes / fails}%`)
+console.log(`Success Rate: ${successes / (successes + fails)}%`)
 */

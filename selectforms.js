@@ -160,6 +160,31 @@ document.forms['gearlevel'].elements['weapon_start'].onchange = function(e) {
     adjustEndSelect('weapon_start', 'weapon_end')
 };
 
+document.forms['gearlevel'].elements['set_start'].onchange = function(e) {
+    head_start.value = set_start.value;
+    shoulders_start.value =  set_start.value;
+    chest_start.value = set_start.value;
+    hands_start.value = set_start.value;
+    legs_start.value = set_start.value;
+    weapon_start.value = set_start.value;
+    adjustEndSelect('set_start', 'set_end');
+    adjustEndSelect('head_start', 'head_end')
+    adjustEndSelect('shoulders_start', 'shoulders_end')
+    adjustEndSelect('chest_start', 'chest_end')
+    adjustEndSelect('hands_start', 'hands_end')
+    adjustEndSelect('legs_start', 'legs_end')
+    adjustEndSelect('weapon_start', 'weapon_end')
+};
+
+document.forms['gearlevel'].elements['set_end'].onchange = function(e) {
+    head_end.value = set_end.value;
+    shoulders_end.value =  set_end.value;
+    chest_end.value = set_end.value;
+    hands_end.value = set_end.value;
+    legs_end.value = set_end.value;
+    weapon_end.value = set_end.value;
+};
+
 // Populate associated select box as page loads
 (function() { // immediate function to avoid globals
     
@@ -200,4 +225,6 @@ function copyAllSelection() {
     legs_end.innerHTML = root.innerHTML;
     weapon_start.innerHTML = root.innerHTML;
     weapon_end.innerHTML = root.innerHTML;
+    set_start.innerHTML = root.innerHTML;
+    set_end.innerHTML = root.innerHTML;
 };

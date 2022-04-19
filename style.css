@@ -6,7 +6,7 @@ input { display: table-cell; }
 textarea {
     user-select: none;
     position: absolute;
-    height: 150px;
+    height: 225px;
     width: 400px;
     left: 250px;
     resize: none;

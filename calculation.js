@@ -2,6 +2,8 @@
 var gold, silver;
 // Tier-Specfic Materials
 var guardian_stone, destruction_stone, leapstone, shard, fusion_material;
+// Debugging Variables
+var successes, fails;
 
 let btnCalculate = document.createElement("button");
 btnCalculate.innerHTML = "Calculate";
@@ -21,10 +23,11 @@ function progressHone(start, end) {
         // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
         if (randomInt() <= chance(document.getElementById("tier").value, parseInt(start))) {
             start++;
+            successes++;
             printTerminal("Success! Gear level is now: " + start);
         }
         else {
-            console.log(`failed at: ${start}`)
+            fails++;
             printTerminal("Failed at gear level: " + start);
         }
     }
@@ -54,20 +57,23 @@ function calculate() {
     shard = 0;
     fusion_material = 0;
 
+    successes = 0;
+    fails = 0;
+
     // Binding variables to document select forms
-    var tier = document.getElementById("tier").value
-    var head_start = document.getElementById("head_start").value;
-    var head_end = document.getElementById("head_end").value;
-    var shoulders_start = document.getElementById("shoulders_start").value;
-    var shoulders_end = document.getElementById("shoulders_end").value;
-    var chest_start = document.getElementById("chest_start").value;
-    var chest_end = document.getElementById("chest_end").value;
-    var hands_start = document.getElementById("hands_start").value;
-    var hands_end = document.getElementById("hands_end").value;
-    var legs_start = document.getElementById("legs_start").value;
-    var legs_end = document.getElementById("legs_end").value;
-    var weapon_start = document.getElementById("weapon_start").value;
-    var weapon_end = document.getElementById("weapon_end").value;
+    var tier = parseInt(document.getElementById("tier").value);
+    var head_start = parseInt(document.getElementById("head_start").value);
+    var head_end = parseInt(document.getElementById("head_end").value);
+    var shoulders_start = parseInt(document.getElementById("shoulders_start").value);
+    var shoulders_end = parseInt(document.getElementById("shoulders_end").value);
+    var chest_start = parseInt(document.getElementById("chest_start").value);
+    var chest_end = parseInt(document.getElementById("chest_end").value);
+    var hands_start = parseInt(document.getElementById("hands_start").value);
+    var hands_end = parseInt(document.getElementById("hands_end").value);
+    var legs_start = parseInt(document.getElementById("legs_start").value);
+    var legs_end = parseInt(document.getElementById("legs_end").value);
+    var weapon_start = parseInt(document.getElementById("weapon_start").value);
+    var weapon_end = parseInt(document.getElementById("weapon_end").value);
 
     // Run main portion of program
     progressHone(head_start, head_end);
@@ -76,6 +82,9 @@ function calculate() {
     progressHone(hands_start, hands_end);
     progressHone(legs_start, legs_end);
     progressHone(weapon_start, weapon_end);
+
+    console.log(`Successes: ${successes}`)
+    console.log(`Fails: ${fails}`)
 }
 
 

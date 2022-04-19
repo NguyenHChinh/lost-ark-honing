@@ -13,18 +13,19 @@ document.body.appendChild(btnCalculate);
 
 // Creates a random integer from 1 to 100, used for creating my randomc hance
 function randomInt() {
-    return Math.random() * (100 - 1) + 1;
+    return parseInt(Math.random() * (101 - 1) + 0);
 }
 
 function progressHone(start, end) {
     while (start < end) {
         // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
-        if (randomInt() < 50) {
-            printTerminal("Failed at gear level: " + start);
-        }
-        else {
+        if (randomInt() < chance(document.getElementById("tier").value, parseInt(start))) {
             start++;
             printTerminal("Success! Gear level is now: " + start);
+        }
+        else {
+            console.log(`failed at: ${start}`)
+            printTerminal("Failed at gear level: " + start);
         }
     }
 }
@@ -76,3 +77,20 @@ function calculate() {
     progressHone(legs_start, legs_end);
     progressHone(weapon_start, weapon_end);
 }
+
+// TESTING CHANCE MANUALLY
+/*
+fails = 0;
+successes = 0;
+for (let i = 0; i < 100000; i++) {
+    if (randomInt() < chance('tier1', 19)) {
+        successes++;
+    }
+    else {
+        fails++;
+    }
+}
+console.log(`Successes: ${successes}`)
+console.log(`Fails: ${fails}`)
+console.log(`Success Rate: ${successes / fails}%`)
+*/

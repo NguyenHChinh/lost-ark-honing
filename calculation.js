@@ -18,7 +18,7 @@ function randomInt() {
     return parseInt(Math.random() * (100) + 1);
 }
 
-function progressHone(start, end) {
+function progressHone(start, end, type) {
     let chance = 0;
     let bonus = 0;
     let artisan = 0;
@@ -28,6 +28,9 @@ function progressHone(start, end) {
         chance = base_chance;
         // Bonus chance on fails
         chance += bonus;
+
+        tier = document.getElementById("tier").value;
+        increaseMaterials(tier, start, type);
 
         if (artisan >= 100) {
             start++;
@@ -45,7 +48,7 @@ function progressHone(start, end) {
             bonus = 0;
             // Resetting Artisan's energy
             artisan = 0;
-            printTerminal(`Success! Gear level is now: ${start}!`);
+            printTerminal(`Success! Honed with ${chance.toFixed(2)}% chance! New gear level: +${start}!`);
         }
         else {
             fails++;
@@ -53,7 +56,7 @@ function progressHone(start, end) {
             bonus += base_chance * 0.1;
             // Increasing Artisan's energy based on current chance
             artisan = artisan + (chance * 0.465);
-            printTerminal(`Failed at gear level: ${start} with a ${chance}% chance!`);
+            printTerminal(`Failed at gear level: +${start} with a ${chance.toFixed(2)}% chance!`);
         }
     }
 }
@@ -86,7 +89,6 @@ function calculate() {
     fails = 0;
 
     // Binding variables to document select forms
-    var tier = parseInt(document.getElementById("tier").value);
     var head_start = parseInt(document.getElementById("head_start").value);
     var head_end = parseInt(document.getElementById("head_end").value);
     var shoulders_start = parseInt(document.getElementById("shoulders_start").value);
@@ -101,12 +103,12 @@ function calculate() {
     var weapon_end = parseInt(document.getElementById("weapon_end").value);
 
     // Run main portion of program
-    progressHone(head_start, head_end);
-    progressHone(shoulders_start, shoulders_end);
-    progressHone(chest_start, chest_end);
-    progressHone(hands_start, hands_end);
-    progressHone(legs_start, legs_end);
-    progressHone(weapon_start, weapon_end);
+    progressHone(head_start, head_end, "armor");
+    progressHone(shoulders_start, shoulders_end, "armor");
+    progressHone(chest_start, chest_end, "armor");
+    progressHone(hands_start, hands_end, "armor");
+    progressHone(legs_start, legs_end, "armor");
+    progressHone(weapon_start, weapon_end, "weapon");
 
     console.log(`Successes: ${successes}`)
     console.log(`Fails: ${fails}`)

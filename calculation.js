@@ -3,22 +3,26 @@ var gold, silver;
 // Tier-Specfic Materials
 var guardian_stone, destruction_stone, leapstone, shard, fusion_material;
 // Debugging Variables
-var successes, fails;
+var successes, fails, pities;
 
-let btnCalculate = document.createElement("button");
-btnCalculate.innerHTML = "Calculate";
-btnCalculate.type = "submit";
-btnCalculate.onclick = function () {
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let btnSingleRun = document.createElement("button");
+btnSingleRun.innerHTML = "Single Run";
+btnSingleRun.type = "submit";
+btnSingleRun.onclick = function () {
     calculate();
 }
-document.body.appendChild(btnCalculate);
+document.body.appendChild(btnSingleRun);
 
 // Creates a random integer from 1 to 100, used for creating my randomc hance
 function randomInt() {
     return parseInt(Math.random() * (100) + 1);
 }
 
-function progressHone(start, end, type) {
+async function progressHone(start, end, type, specific) {
     let chance = 0;
     let bonus = 0;
     let artisan = 0;
@@ -34,13 +38,13 @@ function progressHone(start, end, type) {
 
         if (artisan >= 100) {
             start++;
-            successes++;
+            pities++;
             bonus = 0;
             artisan = 0;
-            printTerminal(`Yikes.. You hit pity! Gear level is now: ${start}`);
+            printTerminal(`${specific} Armor: Yikes.. You hit pity! Gear level is now: ${start}`);
             continue;
         }
-        // VERY TEMPORARY EXAMPLE CASE, NO IMPLEMENTATION OF ACTUAL CHANCE NOR MATERIAL YET
+
         if (randomInt() <= chance) {
             successes++;
             // Increasing "item level"
@@ -49,7 +53,7 @@ function progressHone(start, end, type) {
             bonus = 0;
             // Resetting Artisan's energy
             artisan = 0;
-            printTerminal(`Success! Honed with ${chance.toFixed(2)}% chance! New gear level: +${start}!`);
+            printTerminal(`${specific} Armor: Success! Honed with ${chance.toFixed(2)}% chance! New gear level: +${start}!`);
         }
         else {
             fails++;
@@ -57,14 +61,16 @@ function progressHone(start, end, type) {
             bonus += base_chance * 0.1;
             // Increasing Artisan's energy based on current chance
             artisan = artisan + (chance * 0.465);
-            printTerminal(`Failed at gear level: +${start} with a ${chance.toFixed(2)}% chance!`);
+            printTerminal(`${specific} Armor: Failed at gear level: +${start} with a ${chance.toFixed(2)}% chance!`);
         }
+
+        await sleep(10);
     }
 }
 
 var terminal = document.getElementById("terminal");
 function printTerminal(string) {
-    if (terminal.value.length > 2000) {
+    if (/*terminal.value.length > 2000*/false) {
         terminal.value = terminal.value.slice(100);
         var lines = terminal.value.split('\n');
         lines.splice(0,1);
@@ -80,7 +86,7 @@ function printOutput(string) {
     output.value = output.value + string + '\n';
 }
 
-function calculate() {
+async function calculate() {
     // Resetting variables
     terminal.value = "";
     output.value = "";
@@ -94,6 +100,7 @@ function calculate() {
 
     successes = 0;
     fails = 0;
+    pities = 0;
 
     // Binding variables to document select forms
     var tier = document.getElementById("tier").value;
@@ -111,15 +118,12 @@ function calculate() {
     var weapon_end = parseInt(document.getElementById("weapon_end").value);
 
     // Run main portion of program
-    progressHone(head_start, head_end, "armor");
-    progressHone(shoulders_start, shoulders_end, "armor");
-    progressHone(chest_start, chest_end, "armor");
-    progressHone(hands_start, hands_end, "armor");
-    progressHone(legs_start, legs_end, "armor");
-    progressHone(weapon_start, weapon_end, "weapon");
-
-    console.log(`Successes: ${successes}`)
-    console.log(`Fails: ${fails}`)
+    await progressHone(head_start, head_end, "armor", "Head");
+    await progressHone(shoulders_start, shoulders_end, "armor", "Shoulder");
+    await progressHone(chest_start, chest_end, "armor", "Chest");
+    await progressHone(hands_start, hands_end, "armor", "Hand");
+    await progressHone(legs_start, legs_end, "armor", "Leg");
+    await progressHone(weapon_start, weapon_end, "weapon", "Weapon");
 
     // If non-zero, output to output terminal
     if (guardian_stone) {
@@ -212,7 +216,11 @@ function calculate() {
         printOutput("Silver: " + silver);
     }
 
-    printOutput("\nFails: " + fails)
+    if (output.value != "") {
+        printOutput("");
+    }
+    printOutput("Fails: " + fails)
+    printOutput("Pities: " + pities)
 }
 
 // TESTING CHANCE MANUALLY

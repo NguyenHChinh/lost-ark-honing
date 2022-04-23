@@ -185,6 +185,12 @@ document.forms['gearlevel'].elements['set_end'].onchange = function(e) {
     weapon_end.value = set_end.value;
 };
 
+// If any of the select forms change, resett the honing terminal and output terminal
+document.forms['gearlevel'].onchange = function(e) {
+    document.getElementById("terminal").value = "";
+    document.getElementById("output").value = "";
+};
+
 // Populate associated select box as page loads
 (function() { // immediate function to avoid globals
     

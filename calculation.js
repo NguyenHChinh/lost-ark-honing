@@ -34,6 +34,7 @@ function progressHone(start, end, type) {
 
         if (artisan >= 100) {
             start++;
+            successes++;
             bonus = 0;
             artisan = 0;
             printTerminal(`Yikes.. You hit pity! Gear level is now: ${start}`);
@@ -74,9 +75,15 @@ function printTerminal(string) {
     terminal.scrollTop = terminal.scrollHeight;
 }
 
+var output = document.getElementById("output");
+function printOutput(string) {
+    output.value = output.value + string + '\n';
+}
+
 function calculate() {
     // Resetting variables
     terminal.value = "";
+    output.value = "";
     gold = 0;
     silver = 0;
     guardian_stone = 0;
@@ -89,6 +96,7 @@ function calculate() {
     fails = 0;
 
     // Binding variables to document select forms
+    var tier = document.getElementById("tier").value;
     var head_start = parseInt(document.getElementById("head_start").value);
     var head_end = parseInt(document.getElementById("head_end").value);
     var shoulders_start = parseInt(document.getElementById("shoulders_start").value);
@@ -112,6 +120,99 @@ function calculate() {
 
     console.log(`Successes: ${successes}`)
     console.log(`Fails: ${fails}`)
+
+    // If non-zero, output to output terminal
+    if (guardian_stone) {
+        let output = "";
+        switch (tier) {
+            case 'tier1':
+                output = "Guardian Stone Fragments: ";
+                break;
+            case 'tier2':
+                output = "Guardian Stones: ";
+                break;
+            default:
+                output = "Guardian Stone Crystals: ";
+                break;
+        }
+        output = output + guardian_stone;
+        printOutput(output);
+    }
+    if (destruction_stone) {
+        let output = "";
+        switch (tier) {
+            case 'tier1':
+                output = "Destruction Stone Fragments: ";
+                break;
+            case 'tier2':
+                output = "Destruction Stones: ";
+                break;
+            default:
+                output = "Destruction Stone Crystals: ";
+                break;
+        }
+        output = output + destruction_stone;
+        printOutput(output);
+    }
+    if (leapstone) {
+        let output = "";
+        switch (tier) {
+            case 'tier1':
+                output = "Harmony Leapstones: ";
+                break;
+            case 'tier2':
+                output = "Life Leapstones: ";
+                break;
+            case 'tier3L':
+                output = "Honor Leapstones: ";
+                break;
+            case 'tier3M':
+                output = "Great Honor Leapstones: ";
+                break;
+        }
+        output = output + leapstone;
+        printOutput(output);
+    }
+    if (fusion_material) {
+        let output = "";
+        switch (tier) {
+            case 'tier2':
+                output = "Caldarr Fusion Material: ";
+                break;
+            case 'tier3L':
+                output = "Simple Oreha Fusion Material: ";
+                break;
+            case 'tier3M':
+                output = "Basic Oreha Fusion Material: "
+                break;
+        }
+        output = output + fusion_material;
+        printOutput(output);
+    }
+    if (shard) {
+        let output = "";
+        switch (tier) {
+            case 'tier1':
+                output = "Harmony Shards: ";
+                break;
+            case 'tier2':
+                output = "Life Shards: ";
+                break;
+            default:
+                output = "Honor Shards: ";
+                break;
+        }
+        output = output + shard;
+        printOutput(output);
+    }
+    if (gold) {
+        printOutput("Gold: " + gold);
+    }
+    if (silver) {
+        printOutput("Silver: " + silver);
+    }
+
+    printOutput("\nFails: " + fails)
 }
 
 // TESTING CHANCE MANUALLY

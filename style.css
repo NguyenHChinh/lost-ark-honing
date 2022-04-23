@@ -3,11 +3,22 @@ p     { display: table-row;  }
 label { display: table-cell; }
 input { display: table-cell; }
 
-textarea {
+.terminal {
     user-select: none;
     position: absolute;
-    height: 225px;
-    width: 450px;
-    left: 250px;
+    height: 220px;
+    width: 415px;
+    left: 225px;
     resize: none;
+    font: 12px "Courier New"
+}
+
+.output {
+    user-select: none;
+    position: absolute;
+    height: 220px;
+    width: 415px;
+    left: 655px;
+    resize: none;
+    font: 12px "Courier New"
 }

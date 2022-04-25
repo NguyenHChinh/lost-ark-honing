@@ -5,6 +5,32 @@ var guardian_stone, destruction_stone, leapstone, shard, fusion_material;
 // Debugging Variables
 var successes, fails, pities;
 
+// Specific forms
+var terminal = document.getElementById("terminal");
+var output = document.getElementById("output");
+var tier_select = document.getElementById("tier");
+var start_select = document.getElementById("set_start");
+var end_select = document.getElementById("set_end");
+var head_start_select = document.getElementById("head_start");
+var head_end_select  = document.getElementById("head_end");
+var shoulders_start_select  = document.getElementById("shoulders_start");
+var shoulders_end_select  = document.getElementById("shoulders_end");
+var chest_start_select  = document.getElementById("chest_start");
+var chest_end_select  = document.getElementById("chest_end");
+var hands_start_select  = document.getElementById("hands_start");
+var hands_end_select  = document.getElementById("hands_end");
+var legs_start_select  = document.getElementById("legs_start");
+var legs_end_select  = document.getElementById("legs_end");
+var weapon_start_select  = document.getElementById("weapon_start");
+var weapon_end_select  = document.getElementById("weapon_end");
+var all_selects = [tier_select, start_select, end_select,
+                   head_start_select, head_end_select,
+                   shoulders_start_select, shoulders_end_select,
+                   chest_start_select, chest_end_select,
+                   hands_start_select, hands_end_select,
+                   legs_start_select, legs_end_select,
+                   weapon_start_select, weapon_end_select];
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -13,17 +39,16 @@ let btnAverage = document.createElement("button");
 btnAverage.innerHTML = "Average of 1000 Runs";
 btnAverage.type = "submit";
 btnAverage.onclick = function () {
+    disableInputs();
     averageRuns();
 }
 document.body.appendChild(btnAverage);
-
-document.body.appendChild(document.createElement("BR"));
-document.body.appendChild(document.createElement("BR"));
 
 let btnSingleRun = document.createElement("button");
 btnSingleRun.innerHTML = "Single Run";
 btnSingleRun.type = "submit";
 btnSingleRun.onclick = function () {
+    disableInputs();
     singleRun();
 }
 document.body.appendChild(btnSingleRun);
@@ -31,6 +56,28 @@ document.body.appendChild(btnSingleRun);
 // Creates a random integer from 1 to 100, used for creating my randomc hance
 function randomInt() {
     return parseInt(Math.random() * (100) + 1);
+}
+
+function disableInputs() {
+    btnSingleRun.disabled = true;
+    btnAverage.disabled = true;
+    btnSingleRun.className = "disabled";
+    btnAverage.className = "disabled";
+
+    for (let i = 0; i < all_selects.length; i++) {
+        all_selects[i].disabled = true;
+    }
+}
+
+function enableInputs() {
+    btnSingleRun.disabled = false;
+    btnAverage.disabled = false;
+    btnSingleRun.className = "";
+    btnAverage.className = "";
+
+    for (let i = 0; i < all_selects.length; i++) {
+        all_selects[i].disabled = false;
+    }
 }
 
 function progressHone(start, end, type) {
@@ -121,7 +168,6 @@ async function asyncProgressHone(start, end, type, specific) {
     }
 }
 
-var terminal = document.getElementById("terminal");
 function printTerminal(string) {
     if (/*terminal.value.length > 2000*/false) {
         terminal.value = terminal.value.slice(100);
@@ -134,7 +180,6 @@ function printTerminal(string) {
     terminal.scrollTop = terminal.scrollHeight;
 }
 
-var output = document.getElementById("output");
 function printOutput(string) {
     output.value = output.value + string + '\n';
 }
@@ -274,6 +319,8 @@ async function singleRun() {
     }
     printOutput("Fails: " + fails)
     printOutput("Pities: " + pities)
+
+    enableInputs();
 }
 
 function averageRuns() {
@@ -424,6 +471,8 @@ function averageRuns() {
     }
     printOutput("Fails: " + (fails / 1000).toFixed(2));
     printOutput("Pities: " + (pities / 1000).toFixed(2));
+
+    enableInputs();
 }
 
 // TESTING CHANCE MANUALLY
